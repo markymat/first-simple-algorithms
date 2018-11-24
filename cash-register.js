@@ -8,8 +8,9 @@ var currencyUnits = [["PENNY",0.01],["NICKEL",0.05],["DIME",0.1],["QUARTER",0.25
 
 for(var i=0; i<cid.length; i++){
    moneyTotal += cid[i][1];
-}  //estimating moneyTotal
+}  //estimating moneyTotal in register
 
+//takes each currencyUnits and checks if there are any avaible for user change give back
 for(i=8; i>-1; i--){
  if (currencyUnits[i][1]<=change && cid[i][1]>0){
    cid[i][1] = round(cid[i][1] - currencyUnits[i][1]);
@@ -26,13 +27,13 @@ for(i=8; i>-1; i--){
      status.change = changeWithUnits.filter((x)=> x[1]>0).sort((a,b)=> a[1]<b[1] );
      return status
      } 
-    else if (currencyUnits[i][1]<=change){
+    else if (currencyUnits[i][1]<=change){ //if there is still change to subtract currency unit value from  change
       i+=1;
      }
   }
 }
 
-  if (round(change)>0){
+  if (round(change)>0){ //after all calculations , if there is still some change to give back
     status.status = "INSUFFICIENT_FUNDS";
     return status;
   }
